@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "JavaScript development environment starter kit",
   "scripts": {
-    "start": "npm-run-all --parallel security-check open:src",
+    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch",
     "open:src": "babel-node buildScripts/srcServer.js",
     "lint": "esw webpack.config.* src buildScripts",
+    "lint:watch": "npm run lint -- --watch",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
-    "share": "npm-run-all --parallel open:src localtunnel"
+    "share": "npm-run-all --parallel open:src localtunnel",
+    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Cory House",
   "license": "MIT",
